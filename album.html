@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<title>反洗钱月报</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#000;overflow:hidden}
+.book{display:flex;height:100vh;transition:transform 0.5s ease}
+.page{min-width:100vw;height:100vh;display:flex;align-items:center;justify-content:center}
+img{max-width:98%;max-height:98%;object-fit:contain}
+</style>
+</head>
+<body>
+<div class="book" id="book">
+<div class="page"><img src="https://cdn.jsdelivr.net/gh/duoaaa/fanxiqian@main/1.png"></div>
+<div class="page"><img src="https://cdn.jsdelivr.net/gh/duoaaa/fanxiqian@main/2.png"></div>
+</div>
+<script>
+let idx=0,startX=0
+const book=document.getElementById('book')
+const pages=document.querySelectorAll('.page')
+document.addEventListener('touchstart',e=>{startX=e.touches[0].clientX})
+document.addEventListener('touchend',e=>{
+  let diff=e.changedTouches[0].clientX-startX
+  if(diff < -50 && idx < pages.length-1) idx++
+  if(diff > 50 && idx > 0) idx--
+  book.style.transform=`translateX(-${idx*100}vw)`
+})
+</script>
+</body>
+</html>
